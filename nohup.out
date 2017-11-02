@@ -1,1 +1,2 @@
 python: can't open file 'mypythonscript.py': [Errno 2] No such file or directory
+/usr/local/Cellar/python3/3.6.2/Frameworks/Python.framework/Versions/3.6/Resources/Python.app/Contents/MacOS/Python: can't open file 'mypythonscript.py': [Errno 2] No such file or directory
