@@ -1,18 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Simple Bot to reply to Telegram messages.
-This program is dedicated to the public domain under the CC0 license.
-This Bot uses the Updater class to handle the bot.
-First, a few handler functions are defined. Then, those functions are passed to
-the Dispatcher and registered at their respective places.
-Then, the bot is started and runs until we press Ctrl-C on the command line.
-Usage:
-Basic Echobot example, repeats messages.
-Press Ctrl-C on the command line or send a signal to the process to stop the
-bot.
-"""
-
 from link_processing import AffiliateLinkConverter, Connection
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import logging
@@ -45,6 +33,7 @@ def echo(bot, update):
 
     alc = AffiliateLinkConverter(link)
     (affiliateLink, description_note) = alc.get_affiliate_link()
+    link_title = description_note + link_title
 
     c = Connection(access_token='8e2a2f5a74e7fdef0d945977940634e2cbb5cdb5')
     short_url = str(c.shorten_processed(affiliateLink, preferred_domain='bit.ly'))

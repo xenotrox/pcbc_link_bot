@@ -39,13 +39,13 @@ class AffiliateLinkConverter:
     def link_to_affilate_link(self):
         link = self.link
         if "caseking" in link:
-            return self._convert_to_caseking(link), "casekingDE"
+            return self._convert_to_caseking(link), "[Caseking] "
         elif "idealo" in link:
-            return self._convert_to_idealo(link), "idealoAT"
+            return self._convert_to_idealo(link), "[Idealo] "
         elif "alternate" in link:
-            return self._convert_to_alternate(link), "alternateAT"
+            return self._convert_to_alternate(link), "[Alternate] "
         elif "notebooksbilliger" in link:
-            return self._convert_to_notebooksbilliger(link), "notebooksbilligerDE"
+            return self._convert_to_notebooksbilliger(link), "[Notebooksbilliger] "
         else:
             return ("no valid partner", "no note")
 
