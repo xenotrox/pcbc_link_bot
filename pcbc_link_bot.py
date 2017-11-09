@@ -17,8 +17,12 @@ logger = logging.getLogger(__name__)
 
 def start(bot, update):
     """Send a message when the command /start is issued."""
-    update.message.reply_text('Hi!')
-
+    update.message.reply_text('Welcome to the PCBC Link Bot.\n')
+    update.message.reply_text('How to use the bot: ')
+    update.message.reply_text('Send the bot a message with the following syntax.')
+    update.message.reply_text('Link you want to convert \n Title for bitly')
+    update.message.reply_text('You have to send the link and title in one message.')
+    update.message.reply_text('Have fun!')
 
 def help(bot, update):
     """Send a message when the command /help is issued."""
