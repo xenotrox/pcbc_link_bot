@@ -28,7 +28,7 @@ def start(bot, update):
 
 def help(bot, update):
     """Send a message when the command /help is issued."""
-    update.message.reply_text('Help!')
+    update.message.reply_text('Fuck yourself, there is no help!')
 
 
 def echo(bot, update):
@@ -41,11 +41,14 @@ def echo(bot, update):
     (affiliateLink, description_note) = alc.get_affiliate_link()
     link_title = description_note + link_title
 
-    c = Connection(access_token='8e2a2f5a74e7fdef0d945977940634e2cbb5cdb5')
-    short_url = str(c.shorten_processed(affiliateLink, preferred_domain='bit.ly'))
-    c.user_link_edit_processed(short_url, link_title, description_note)
+    try:
+        c = Connection(access_token='8e2a2f5a74e7fdef0d945977940634e2cbb5cdb5')
+        short_url = str(c.shorten_processed(affiliateLink, preferred_domain='bit.ly'))
+        c.user_link_edit_processed(short_url, link_title, description_note)
+        update.message.reply_text(link_title + "\n" + short_url)
+    except IndexError:
+        update.message.reply_text("error: no valid link")
 
-    update.message.reply_text(link_title + "\n" + short_url)
 
 
 def error(bot, update, error):
