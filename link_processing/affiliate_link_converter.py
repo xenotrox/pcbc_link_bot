@@ -14,12 +14,12 @@ class AffiliateLinkConverter:
         link_parts = link.split("/")
         affiliate_link_parts = ["http://partners.webmasterplan.com/click.asp?ref=807387&site=15168&type",
                                 "=text&tnb=8&diurl=https%3A%2F%2F", "%2F", "%2F", "%2F", "%3Fcamp%3Daffilinet"]
+        print(len(affiliate_link_parts))
         return (affiliate_link_parts[0] + affiliate_link_parts[1]
-                + affiliate_link_parts[2] + link_parts[2]
-                + affiliate_link_parts[3] + link_parts[3]
-                + affiliate_link_parts[4] + link_parts[4]
-                + affiliate_link_parts[5] + link_parts[5]
-                + affiliate_link_parts[6])
+                + link_parts[2] + affiliate_link_parts[2]
+                + link_parts[3] + affiliate_link_parts[3]
+                + link_parts[4] + affiliate_link_parts[4]
+                + link_parts[5] + affiliate_link_parts[5])
 
     def _convert_to_alternate(self, link):
         link_parts = link
