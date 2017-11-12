@@ -44,3 +44,6 @@ atlassian-ide-plugin.xml
 
 # Cursive Clojure plugin
 .idea/replstate.xml
+
+link_processing/.DS_Store
+telegram/.DS_Store

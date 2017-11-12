@@ -22,13 +22,17 @@ class AffiliateLinkConverter:
                 + link_parts[5] + affiliate_link_parts[5])
 
     def _convert_to_alternate(self, link):
-        link_parts = link
-        affiliate_link_parts = ["https://ad.zanox.com/ppc/?43562153C83411884&ULP=[[", "?partner=AtZanox]]",
-                                "?&partner=AtZanox]]"]
-        if link[len(link) - 1] == "?":
-            return affiliate_link_parts[0] + link_parts + affiliate_link_parts[2]
-        else:
-            return affiliate_link_parts[0] + link_parts + affiliate_link_parts[1]
+        link_parts = link.split("/")
+        link = ""
+        affiliate_link_parts = ["https://ad.zanox.com/ppc/?43600950C52555739&ULP=[[https%3A%2F%2Fwww.alternate.de%2F",
+                                "%3Fpartner%3Ddezanoxtextlink%26campaign%3DAF%2FDeZanox%2FTextlinks%2FAlternate]]"]
+        for i in range(0, 3):
+            del link_parts[0]
+
+        for i in range(0, len(link_parts)):
+            link = link + link_parts[i] + "%2F"
+
+        return (affiliate_link_parts[0] + link + affiliate_link_parts[1])
 
     def _convert_to_notebooksbilliger(self, link):
         link_parts = link.replace("+", "%2B")
