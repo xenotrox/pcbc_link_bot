@@ -11,6 +11,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 logger = logging.getLogger(__name__)
 
+
 # Define a few command handlers. These usually take the two arguments bot and
 # update. Error handlers also receive the raised TelegramError object in error.
 
@@ -18,6 +19,7 @@ logger = logging.getLogger(__name__)
 def start(bot, update):
     """Send a message when the command /start is issued."""
     update.message.reply_text('Welcome to the PCBC Link Bot.\n')
+    update.message.reply_text('This is an bot for the company PC Builders Club.')
     update.message.reply_text('How to use the bot: ')
     update.message.reply_text('Send the bot a message with the following syntax.')
     update.message.reply_text('Link you want to convert \nTitle for bitly')
@@ -26,21 +28,27 @@ def start(bot, update):
     update.message.reply_text('https://google.com\nGoogle')
     update.message.reply_text('Have fun!')
 
+
 def help(bot, update):
     """Send a message when the command /help is issued."""
-    update.message.reply_text('Fuck yourself, there is no help!')
+    update.message.reply_text('Please write an email to lukaszach@protonmail.com. Thank you.')
 
 
 def echo(bot, update):
-
+    """Start the link converting"""
+    # Get the message
     message = update.message.text.splitlines()
+
+    # Defied the message into link and link title
     link = message[0]
     link_title = message[1]
 
+    # Convert the link and get the title
     alc = AffiliateLinkConverter(link)
     (affiliateLink, description_note) = alc.get_affiliate_link()
     link_title = description_note + link_title
 
+    # Short the link via bit.ly and return it
     try:
         c = Connection(access_token='8e2a2f5a74e7fdef0d945977940634e2cbb5cdb5')
         short_url = str(c.shorten_processed(affiliateLink, preferred_domain='bit.ly'))
@@ -48,7 +56,6 @@ def echo(bot, update):
         update.message.reply_text(link_title + "\n" + short_url)
     except IndexError:
         update.message.reply_text("error: no valid link")
-
 
 
 def error(bot, update, error):

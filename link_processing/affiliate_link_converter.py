@@ -24,20 +24,27 @@ class AffiliateLinkConverter:
     def _convert_to_alternate(self, link):
         link_parts = link.split("/")
         link = ""
-        affiliate_link_parts = ["https://ad.zanox.com/ppc/?43600950C52555739&ULP=[[https%3A%2F%2Fwww.alternate.de%2F",
-                                "%3Fpartner%3Ddezanoxtextlink%26campaign%3DAF%2FDeZanox%2FTextlinks%2FAlternate]]"]
+        affiliate_link_parts =   "http://www.awin1.com/cread.php?awinaffid=417971&awinmid=11731&p=https%3A%2F%2Fwww.alternate.de%2F"
         for i in range(0, 3):
             del link_parts[0]
 
         for i in range(0, len(link_parts)):
-            link = link + link_parts[i] + "%2F"
+            if i == len(link_parts) - 1:
+                link = link + link_parts[i]
+            else:
+                link = link + link_parts[i] + "%2F"
 
-        return (affiliate_link_parts[0] + link + affiliate_link_parts[1])
+        return affiliate_link_parts + link
 
     def _convert_to_notebooksbilliger(self, link):
         link_parts = link.replace("+", "%2B")
         affiliate_link_parts = ["https://ad.zanox.com/ppc/?42726803C40044189&ULP=[[", "]]"]
         return affiliate_link_parts[0] + link_parts + affiliate_link_parts[1]
+
+    def _convert_to_mindfactory(self, link):
+        link_parts = link.split("/")[4]
+        affiliate_link_parts = "http://www.awin1.com/cread.php?awinaffid=417971&awinmid=12252&clickref=pcbc&p=https%3A%2F%2Fwww.mindfactory.de%2Fproduct_info.php%2F"
+        return affiliate_link_parts + link_parts
 
     @property
     def link_to_affilate_link(self):
@@ -51,6 +58,8 @@ class AffiliateLinkConverter:
             return self._convert_to_alternate(link), "[Alternate] "
         elif "notebooksbilliger.de" in link:
             return self._convert_to_notebooksbilliger(link), "[Notebooksbilliger] "
+        elif "mindfactory.de" in link:
+            return self._convert_to_mindfactory(link), "[Mindfactory]"
         else:
             return ("no valid partner", "no note")
 
